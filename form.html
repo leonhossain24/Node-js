@@ -1,57 +1,50 @@
 <!DOCTYPE html>
 <html>
-<body>
-
-<h1>Create New Article</h1>
-
-<input type='text' id='title' placeholder='Title'> </br>
-
-<textarea id='content' placeholder='Content'></textarea>
-
-<button id='submit'>Submit</button>
-
-
-
-<script
-src="https://code.jquery.com/jquery-3.3.1.min.js"
-integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-crossorigin="anonymous"></script>
-
-
-<script>
-  var article = {title:'', content:''};
-  
-  $('#submit').click(function(event){
-    article.title = $('#title').val();
-    article.content = $('#content').val();
-    $.ajax(
-      {
-        method:'POST',
-        url:'/article/create',
-        data:article
-      }).done(function(response){
-            console.log(response);
-      }).fail(function(response){
-            console.log(response);
-      });
-  })
-  
-  
-</script>
-			  
-			  
-
-<!--<form action="/action_page.php">-->
-<!--  First name:<br>-->
-<!--  <input type="text" name="firstname" value="Mickey">-->
-<!--  <br>-->
-<!--  Last name:<br>-->
-<!--  <input type="text" name="lastname" value="Mouse">-->
-<!--  <br><br>-->
-<!--  <input type="submit" value="Submit">-->
-<!--</form> -->
-
-<!--<p>If you click the "Submit" button, the form-data will be sent to a page called "/action_page.php".</p>-->
-
-</body>
+    <head>
+        <meta charset="utf-8">
+        <title>Create New Article</title>
+    </head>
+    
+    <body>
+        <h1>New Article</h1>
+        <input id="title" type="text" name="title" placeholder="Enter Title">
+        <br /> <br />
+        <textarea id="content" type="text" name="textarea"/> </textarea>
+        <br /> <br />
+        <button id="submit" type="button">Submit</button>
+        <button id="getArticles" type="button">Get all articles</button>
+        
+        <!--jQuery-->
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+        <!--JS-->
+        <!--Input handling and AJAX Code-->
+        <script>
+            // Declaring a var to capture the input values
+            var article = {title:"", content:""};
+            $('#submit').click(function(event){
+                article.title = $('#title').val();
+                article.content = $('#content').val();
+                $.ajax({
+                    method:"POST",
+                    url: '/article/create',
+                    data: article,
+                }).done(function(response){
+                    console.log(response);
+                }).fail(function(response){
+                    console.log(response.responseText);
+                });
+            });
+            
+            $('#getArticles').click(function(event){
+                $.ajax({
+                    method:"GET",
+                    url:"/article/list"
+                }).done(function(response){
+                    console.log(response);
+                }).fail(function(response){
+                    console.log(response.responseText);
+                });
+            });
+        </script>
+    </body>
 </html>
