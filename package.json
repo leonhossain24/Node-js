@@ -18,7 +18,10 @@
   },
   "homepage": "https://github.com/leonhossain24/Node-js#readme",
   "dependencies": {
-    "express": "^4.16.4"
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "mongo": "^0.1.0",
+    "mongodb": "^3.1.10"
   },
   "devDependencies": {
     "nodemon": "^1.18.6"
